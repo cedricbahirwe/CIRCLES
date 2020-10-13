@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CirclesCC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rm4-Os-TEL">
+                                <rect key="frame" x="0.0" y="44" width="414" height="54"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:0:0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-Zg-v8V">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                        <color key="textColor" red="0.55847781900000004" green="0.24402841929999999" blue="0.20782196519999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hu8-fv-ZQt">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="54"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CQp-Zg-v8V" secondAttribute="trailing" id="5p2-tQ-ARt"/>
+                                    <constraint firstAttribute="height" constant="54" id="6aU-eX-IFS"/>
+                                    <constraint firstItem="hu8-fv-ZQt" firstAttribute="bottom" secondItem="CQp-Zg-v8V" secondAttribute="bottom" id="8dC-p3-BQ9"/>
+                                    <constraint firstItem="CQp-Zg-v8V" firstAttribute="leading" secondItem="Rm4-Os-TEL" secondAttribute="leading" id="Dxg-eQ-IsL"/>
+                                    <constraint firstItem="CQp-Zg-v8V" firstAttribute="top" secondItem="Rm4-Os-TEL" secondAttribute="top" id="ELQ-Tg-Con"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="hu8-fv-ZQt" secondAttribute="trailing" constant="314" id="Imj-u5-Qk3"/>
+                                    <constraint firstAttribute="bottom" secondItem="CQp-Zg-v8V" secondAttribute="bottom" id="KXi-dc-ie5"/>
+                                    <constraint firstItem="hu8-fv-ZQt" firstAttribute="top" secondItem="CQp-Zg-v8V" secondAttribute="top" id="xBc-Dq-Y0T"/>
+                                    <constraint firstItem="hu8-fv-ZQt" firstAttribute="leading" secondItem="CQp-Zg-v8V" secondAttribute="leading" id="xkD-ee-WQc"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uF5-GH-Xcc">
+                                <rect key="frame" x="0.0" y="98" width="414" height="798"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Rm4-Os-TEL" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1im-ZV-8ql"/>
+                            <constraint firstItem="uF5-GH-Xcc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="58N-VJ-zav"/>
+                            <constraint firstAttribute="bottom" secondItem="uF5-GH-Xcc" secondAttribute="bottom" id="7b2-ot-8t7"/>
+                            <constraint firstItem="uF5-GH-Xcc" firstAttribute="top" secondItem="Rm4-Os-TEL" secondAttribute="bottom" id="Ahq-Go-496"/>
+                            <constraint firstAttribute="trailing" secondItem="uF5-GH-Xcc" secondAttribute="trailing" id="kyf-eg-9ed"/>
+                            <constraint firstItem="Rm4-Os-TEL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="n18-UX-EVW"/>
+                            <constraint firstItem="Rm4-Os-TEL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tqA-D4-epH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="playView" destination="uF5-GH-Xcc" id="Dbu-4U-Etr"/>
+                        <outlet property="scoreLabel" destination="hu8-fv-ZQt" id="ZEp-lf-exT"/>
+                        <outlet property="timerLabel" destination="CQp-Zg-v8V" id="2Hq-jh-YyV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:0:0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FG6-YH-tHd">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                    <color key="textColor" red="0.55847781900000004" green="0.24402841929999999" blue="0.20782196519999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </objects>
+            <point key="canvasLocation" x="139" y="108"/>
+        </scene>
+    </scenes>
+</document>
