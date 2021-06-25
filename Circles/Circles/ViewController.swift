@@ -35,8 +35,8 @@ class ViewController: UIViewController {
     func getTargetScore() -> Int {
         let defaultSurface = Int(304704) // ACCORDING TO IPHONE 6S DIMENSIONS
         let defaultTargetSCore = 350 // ACCORDING TO IPHONE 6S DIMENSIONS
-        let width = self.view.bounds.width
-        let height = self.view.bounds.height
+        let width = view.bounds.width
+        let height = view.bounds.height
         let playableSurface = Int(width * height)
         let targetScore = Int((playableSurface * defaultTargetSCore ) / defaultSurface)
         return targetScore
@@ -52,11 +52,11 @@ class ViewController: UIViewController {
             UIView.animate(withDuration: 0.2) {
                 circleView.alpha = 1
             }
-            self.playView.addSubview(circleView)
+            playView.addSubview(circleView)
 
         }
         numberOfTouches += 1
-        self.updateScoreLabel(score: numberOfTouches)
+        updateScoreLabel(score: numberOfTouches)
         
     }
     func showAlert() {
@@ -81,7 +81,7 @@ class ViewController: UIViewController {
             }
         }
         alertVC.addAction(dismissAction)
-        self.present(alertVC, animated: true)
+        present(alertVC, animated: true)
         
     }
     
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
         return type == "c" ? "\(hrs)h:\(min)m" : "\(hrs):\(min):\(sec)"
     }
     func updateScoreLabel(score: Int) {
-        self.scoreLabel.text = String(describing: score)
+        scoreLabel.text = String(describing: score)
         
     }
 }
@@ -109,7 +109,7 @@ extension ViewController {
         actions.forEach { (alertAction) in
             alert.addAction(alertAction)
         }
-        self.present(alert, animated: true)
+        present(alert, animated: true)
     }
     func alertForWinner(title: String, message: String, actions: [UIAlertAction], preferredStyle: UIAlertController.Style = .actionSheet ){
         let alert = UIAlertController(title:  title, message: message, preferredStyle: .alert)
@@ -135,6 +135,6 @@ extension ViewController {
             alert.addAction(action)
         }
         
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
