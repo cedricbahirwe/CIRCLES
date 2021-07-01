@@ -24,8 +24,8 @@ class ViewController: UIViewController {
         targetScore = getTargetScore()
         print("My size is", view .frame.width, view.frame.height)
         print("My bounds are", view.bounds.width, view.bounds.height)
-        view.backgroundColor = .black
-        playView.backgroundColor = .black
+//        view.backgroundColor = .black
+//        playView.backgroundColor = .black
         DispatchQueue.main.async {
             self.showAlert()
         }
