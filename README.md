@@ -8,5 +8,5 @@ touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
 ```
 
 
-<img alt="Start View" height="890" width="410" src="start.png">&nbsp;&nbsp;&nbsp;&nbsp;<img alt="End View" height="890" src="finish.png">
+<img alt="Start View" height="890" src="start.png">&nbsp;&nbsp;&nbsp;&nbsp;<img alt="End View" height="890" src="finish.png">
 
