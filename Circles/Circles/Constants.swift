@@ -8,35 +8,15 @@
 
 import Foundation
 
-let CIRCLESC_WINNERS = "CIRCLESC_WINNERS"
-let CIRCLESC_PLAYER_ISLOGGEDIN = "CIRCLES_PLAYER_ISLOGGEDIN"
-let CIRCLESC_USER = "CIRCLESC_USER"
-
-let CIRCLESC_BEST_SCORE = "CIRCLESC_BEST_SCORE"
+fileprivate let CIRCLESC_WINNERS = "CIRCLESC_WINNERS"
+fileprivate let CIRCLESC_BEST_SCORE = "CIRCLESC_BEST_SCORE"
 
 class SessionManager {
     private init(){}
     
-    static let instance = SessionManager()
+    static let shared = SessionManager()
     let defaults = UserDefaults.standard
     
-    var winners : [String: Int] {
-        get {
-            return defaults.dictionary(forKey: CIRCLESC_WINNERS) as? [String : Int] ?? [:]
-        }set (value){
-            defaults.set(value,forKey: CIRCLESC_WINNERS)
-        }
-    }
-    
-    
-    var isLoggedIn : Bool {
-        get {
-            return defaults.bool(forKey: CIRCLESC_PLAYER_ISLOGGEDIN)
-        }
-        set (value){
-            defaults.set(value, forKey: CIRCLESC_PLAYER_ISLOGGEDIN)
-        }
-    }
     var bestScore: Int {
         get {
             return defaults.integer(forKey: CIRCLESC_BEST_SCORE)
@@ -47,28 +27,28 @@ class SessionManager {
     }
     
     
-    var HelloKigaliUser : CirclesUser?{
+    var winners: [CircleUser] {
         get{
-            guard let personInfo = UserDefaults.standard.object(forKey: CIRCLESC_USER) as? Data else {return nil}
+            guard let winnersData = UserDefaults.standard.object(forKey: CIRCLESC_WINNERS) as? Data else { return [] }
             
-            return try! JSONDecoder().decode(CirclesUser.self, from: personInfo)
+            return try! JSONDecoder().decode([CircleUser].self, from: winnersData)
         }
-        set(person){
-            if let encoded = try? JSONEncoder().encode(person){
-                UserDefaults.standard.set(encoded, forKey: CIRCLESC_USER)
+        set(persons){
+            if let encoded = try? JSONEncoder().encode(persons){
+                UserDefaults.standard.set(encoded, forKey: CIRCLESC_WINNERS)
             }
         }
     }
     
-    func destroy() {
+    public func destroy() {
         UserDefaults.standard.removeObject(forKey: CIRCLESC_BEST_SCORE)
-        
+        UserDefaults.standard.removeObject(forKey: CIRCLESC_WINNERS)
     }
 }
 
 
 
-struct CirclesUser: Codable {
+struct CircleUser: Codable {
     var name: String
     var score: Int
 }

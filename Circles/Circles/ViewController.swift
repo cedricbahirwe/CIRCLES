@@ -119,7 +119,10 @@ extension ViewController {
             [weak alert] (_) in
             let textField = alert?.textFields![0]
             nameString = textField!.text!
-            SessionManager.instance.winners[nameString] = self.numberOfTouches
+            
+            let winners = sess
+//            let winners = ses
+//            SessionManager.instance.winners[nameString] = self.numberOfTouches
             
         })
         alert.addTextField { (nameTextField) in
