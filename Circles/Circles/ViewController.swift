@@ -10,7 +10,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var scoreLabel: UILabel!
     var numberOfTouches: Int = 0
     var counter: Int = 0
@@ -22,26 +22,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         targetScore = getTargetScore()
-        print("My size is", view .frame.width, view.frame.height)
-        print("My bounds are", view.bounds.width, view.bounds.height)
-//        view.backgroundColor = .black
-//        playView.backgroundColor = .black
-        DispatchQueue.main.async {
-            self.showAlert()
-        }
         print(SessionManager.shared.winners)
     }
     
-    func getTargetScore() -> Int {
-        let defaultSurface = Int(304704) // ACCORDING TO IPHONE 6S DIMENSIONS
-        let defaultTargetSCore = 350 // ACCORDING TO IPHONE 6S DIMENSIONS
-        let width = view.bounds.width
-        let height = view.bounds.height
-        let playableSurface = Int(width * height)
-        let targetScore = Int((playableSurface * defaultTargetSCore ) / defaultSurface)
-        return targetScore
-        
+    override func viewDidAppear(_ animated: Bool) {
+        showOnBoardingAlert()
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let circleCenter = touch.location(in: view)
@@ -53,13 +40,49 @@ class ViewController: UIViewController {
                 circleView.alpha = 1
             }
             playView.addSubview(circleView)
-
+            
         }
         numberOfTouches += 1
         updateScoreLabel(score: numberOfTouches)
         
     }
-    func showAlert() {
+    
+    //    The score is calculated according to the size of the screen
+    //    For bigger screen, the score will be higher...
+    func getTargetScore() -> Int {
+        let defaultSurface = Int(304704) // ACCORDING TO IPHONE 6S DIMENSIONS
+        let defaultTargetSCore = 350 // ACCORDING TO IPHONE 6S DIMENSIONS
+        let width = view.bounds.width
+        let height = view.bounds.height
+        let playableSurface = Int(width * height)
+        let targetScore = Int((playableSurface * defaultTargetSCore ) / defaultSurface)
+        return targetScore
+        
+    }
+    
+    
+    @objc func upCountTimer(){
+        counter += 1
+        timerLabel.text = getReadableTimeFormat(amount: counter, type: "i")
+    }
+    
+    func getReadableTimeFormat(amount: Int, type: String) -> String {
+        let (hrs, minsec) = amount.quotientAndRemainder(dividingBy: 3600)
+        let (min, sec) = minsec.quotientAndRemainder(dividingBy: 60)
+        
+        return type == "c" ? "\(hrs)h:\(min)m" : "\(hrs):\(min):\(sec)"
+    }
+    
+    func updateScoreLabel(score: Int) {
+        scoreLabel.text = String(describing: score)
+        
+    }
+}
+
+
+extension ViewController {
+    
+    func showOnBoardingAlert() {
         let alertVC = UIAlertController(title: "You gonna start the game", message: "The goal is to get the maximum number of touches in a fixed amount of time, Good Luck!!! 🧧", preferredStyle: .actionSheet)
         let dismissAction = UIAlertAction(title: "Start", style: .default) { (_) in
             DispatchQueue.main.async {
@@ -77,7 +100,9 @@ class ViewController: UIViewController {
                   message = "You loose!☹️"
                 }
                 SessionManager.shared.bestScore = self.numberOfTouches
-                self.alertForWinner(title: "Game Over!!!", message:  "\(message), Your score is \(self.numberOfTouches) and the target score is \(self.targetScore)", actions: [])
+                self.presentAlertForWinner(title: "Game Over!!!",
+                                           message:  "\(message), Your score is \(self.numberOfTouches) and the target score is \(self.targetScore)",
+                                           actions: [])
             }
         }
         alertVC.addAction(dismissAction)
@@ -85,36 +110,13 @@ class ViewController: UIViewController {
         
     }
     
-    @objc func upCountTimer(){
-        counter += 1
-        timerLabel.text = getReadableTimeFormat(amount: counter, type: "i")
-    }
-    
-    func getReadableTimeFormat(amount: Int, type: String) -> String {
-        let (hrs, minsec) = amount.quotientAndRemainder(dividingBy: 3600)
-        let (min, sec) = minsec.quotientAndRemainder(dividingBy: 60)
-        
-        return type == "c" ? "\(hrs)h:\(min)m" : "\(hrs):\(min):\(sec)"
-    }
-    func updateScoreLabel(score: Int) {
-        scoreLabel.text = String(describing: score)
-        
-    }
-}
-
-
-extension ViewController {
-    func dispLayAlert(title: String, message: String, actions: [UIAlertAction], preferredStyle: UIAlertController.Style = .actionSheet ) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        actions.forEach { (alertAction) in
-            alert.addAction(alertAction)
-        }
-        present(alert, animated: true)
-    }
-    func alertForWinner(title: String, message: String, actions: [UIAlertAction], preferredStyle: UIAlertController.Style = .actionSheet ){
+    func presentAlertForWinner(title: String,
+                               message: String,
+                               actions: [UIAlertAction],
+                               preferredStyle: UIAlertController.Style = .actionSheet ){
         let alert = UIAlertController(title:  title, message: message, preferredStyle: .alert)
-        var nameString = ""
-
+        var nameString: String = ""
+        
         let updateAction = UIAlertAction(title: "Save", style: .default, handler: {
             [weak alert] (_) in
             let textField = alert?.textFields![0]
@@ -122,6 +124,8 @@ extension ViewController {
             
             let winner = CPlayer(name: nameString, score: self.numberOfTouches)
             SessionManager.shared.addWinner(winner)
+            
+            self.viewDidAppear(false)
             
         })
         alert.addTextField { (nameTextField) in
