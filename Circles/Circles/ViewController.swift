@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             self.showAlert()
         }
-        print(SessionManager.instance.winners)
+        print(SessionManager.shared.winners)
     }
     
     func getTargetScore() -> Int {
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
                 } else {
                   message = "You loose!☹️"
                 }
-                SessionManager.instance.bestScore = self.numberOfTouches
+                SessionManager.shared.bestScore = self.numberOfTouches
                 self.alertForWinner(title: "Game Over!!!", message:  "\(message), Your score is \(self.numberOfTouches) and the target score is \(self.targetScore)", actions: [])
             }
         }
@@ -120,9 +120,8 @@ extension ViewController {
             let textField = alert?.textFields![0]
             nameString = textField!.text!
             
-            let winners = sess
-//            let winners = ses
-//            SessionManager.instance.winners[nameString] = self.numberOfTouches
+            let winner = CPlayer(name: nameString, score: self.numberOfTouches)
+            SessionManager.shared.addWinner(winner)
             
         })
         alert.addTextField { (nameTextField) in
